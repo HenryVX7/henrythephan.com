@@ -101,7 +101,7 @@
 
         /* Hero Section */
         .hero {
-            min-height: 100vh;
+            min-height: 80vh;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -113,7 +113,7 @@
             background: var(--bg-terminal);
             border-radius: 8px;
             width: 100%;
-            max-width: 1600px;
+            max-width: 90%;
             margin: 0 2rem;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
             overflow: hidden;
@@ -210,7 +210,7 @@
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 90%;
             margin: 0 auto;
             padding: 0 2rem;
         }
@@ -238,7 +238,7 @@
         /* About Section */
         .about-grid {
             display: grid;
-            grid-template-columns: 400px 1fr;
+            grid-template-columns: 30% 1fr;
             gap: 4rem;
             align-items: start;
         }
@@ -786,17 +786,17 @@
                             <span>arch || ubuntu</span>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-label">lorem:</span>
-                            <span>ipsum</span>
+                            <span class="stat-label">window manager:</span>
+                            <span>hyprland</span>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-label">lorem:</span>
-                            <span>ipsum</span>
+                            <span class="stat-label">dots:</span>
+                            <span>caelestia</span>
                         </div>
-                        <div class="stat-item">
+                        <!-- <div class="stat-item">
                             <span class="stat-label">lorem:</span>
                             <span>ipsum</span>
-                        </div>                                                
+                        </div> -->
                     </div>
                 </div>
                 <div class="about-content">
@@ -823,7 +823,7 @@
             </div>
             <div class="skills-grid">
                 <div class="skill-category">
-                    <h3><div class="skill-icon"></div>languages</h3>
+                    <h3> languages</h3>
                     <div class="skill-list">
                         <div class="skill-item">
                             <span class="skill-name">bash</span>
@@ -849,7 +849,7 @@
                 </div>
                 
                 <div class="skill-category">
-                    <h3><div class="skill-icon"></div>infrastructure</h3>
+                    <h3> infrastructure</h3>
                     <div class="skill-list">
                         <div class="skill-item">
                             <span class="skill-name">virtualization</span>
@@ -875,7 +875,7 @@
                 </div>
                 
                 <div class="skill-category">
-                    <h3><div class="skill-icon"></div>systems</h3>
+                    <h3>󰍹 systems</h3>
                     <div class="skill-list">
                         <div class="skill-item">
                             <span class="skill-name">linux</span>
@@ -901,7 +901,7 @@
                 </div>
                 
                 <div class="skill-category">
-                    <h3><div class="skill-icon"></div>tools</h3>
+                    <h3> tools</h3>
                     <div class="skill-list">
                         <div class="skill-item">
                             <span class="skill-name">proxmox ve</span>
@@ -939,54 +939,153 @@
             <div class="projects-grid">
                 <div class="project-card">
                     <div class="project-header">
-                        <h3 class="project-title">distributed_task_queue</h3>
+                        <h3 class="project-title">5_node_proxmox_cluster</h3>
                         <div class="project-status">active</div>
                     </div>
                     <div class="project-content">
-                        <p class="project-description">A high-performance distributed task queue system built with Python and Redis. Features automatic scaling, failure recovery, and real-time monitoring dashboard. Handles 10,000+ tasks per minute in production.</p>
+                        <p class="project-description">My goal with deploying a 5-node Proxmox cluster was to achieve high availability, workload optimization, centralized management, and scalability. I was seeking an increase in flexibility during operation while maintaining reliability because these services were crucial to my workflow. These 5 nodes are actively backed up through Proxmox Backup Server, which features deduplication and sync jobs, every hour and are remotely synced off-site every day. These nodes are all remotely accessible via Tailscale, allowing me to browse my local subnet securely from anywhere in the world. These host several services, which include several databases like Microsoft SQL and Postgres, Virtualized Kubernetes cluster, Nextcloud file storage server, Jellyfin media server, video game servers, network-attached storage, smart home assistants, identity provider for single sign-on, and various Docker containers. In addition, I have a VPS with a reverse proxy that tunnels to my homelab. This enables me to securely expose services over the Internet for friends and family to access. The reverse proxy utilizes SSO for IAM and is capable of load balancing when needed. This project enhanced my pre-existing knowledge of system and network administration and introduced me to services and features that I had never used previously. It also demonstrates my ability to design, deploy, and configure Linux servers that can handle real-world virtualization and containerization needs.</p>
                         <div class="project-tech">
-                            <span class="tech-tag">python</span>
-                            <span class="tech-tag">redis</span>
+                            <span class="tech-tag">proxmox</span>
+                            <span class="tech-tag">virtualization</span>
                             <span class="tech-tag">docker</span>
-                            <span class="tech-tag">react</span>
-                            <span class="tech-tag">postgresql</span>
+                            <span class="tech-tag">high availability</span>
+                            <span class="tech-tag">ceph storage</span>
+                            <span class="tech-tag">kubernetes cluster</span>
+                            <span class="tech-tag">infrastructure as code</span>
+                        </div>
+                        <!-- <div class="project-links">
+                            <a href="#" class="project-link">github</a>
+                            <a href="#" class="project-link">demo</a>
+                            <a href="#" class="project-link">docs</a>
+                        </div> -->
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3 class="project-title">self_hosted_identity_federation</h3>
+                        <div class="project-status">maintained</div>
+                    </div>
+                    <div class="project-content">
+                        <p class="project-description">As my Homelab expanded, I needed a way to provision and manage accounts across dozens of services that I use and host daily. I built and deployed a self-hosted Identity Provider (IdP) using Authentik to centralize authentication and enable Single Sign-On (SSO) across multiple self-hosted services in my homelab environment. The goal was to simplify user authentication across services, improve access control and session management, and enhance security with centralized identity management. I set up SSO login flows, group-based access policies, and provisioning rules for seamless onboarding. This allowed me to enable MFA and account linking with pre-existing service users for non-disruptive integration and harden access through IP whitelisting, time-based access windows, and audit logging. This service is highly available with failover across 3 nodes. This project improved the usability and security of my infrastructure while reinforcing my skills in identity federation, access control, and zero-trust design principles.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">openid connect</span>
+                            <span class="tech-tag">ldap</span>
+                            <span class="tech-tag">multi-factor authentication</span>
+                            <span class="tech-tag">identity and access management</span>
+                            <span class="tech-tag">single sign-on</span>
+                        </div>
+                        <!-- <div class="project-links">
+                            <a href="#" class="project-link">github</a>
+                            <a href="#" class="project-link">releases</a>
+                        </div> -->
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3 class="project-title">custom_network_attached_storage_server</h3>
+                        <div class="project-status">maintained</div>
+                    </div>
+                    <div class="project-content">
+                        <p class="project-description">Designed and deployed a custom NAS (Network Attached Storage) server to meet the storage, backup, and media-hosting needs of a growing homelab environment and to offload the compute from my 3-node hyperconverged Ceph cluster. Built from the ground up using commodity hardware like the Jonsbo N2 and an ITX AM4 motherboard with an AMD Ryzen 7 5700G. Utilizing open-source software, the server provides a scalable, secure, and efficient storage solution for both personal and collaborative use. I configured Samba and NFS shares for seamless access across Windows, macOS, and Linux clients, and ZFS as the file system enables data protection and integrity with snapshot and scrub scheduling. This project strengthened my hands-on experience with server provisioning, data redundancy, self-hosting, and home networking which are all critical skills for IT infrastructure and DevOps roles.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">linux server</span>
+                            <span class="tech-tag">cloud administration</span>
+                            <span class="tech-tag">zfs</span>
+                            <span class="tech-tag">server management</span>
+                            <span class="tech-tag">samba/nfs</span>
                         </div>
                         <div class="project-links">
                             <a href="#" class="project-link">github</a>
                             <a href="#" class="project-link">demo</a>
-                            <a href="#" class="project-link">docs</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section contact">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">./contact --info</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon"></div>
+                        <div class="contact-details">
+                            <h4>email</h4>
+                            <p>henrythephan@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon"></div>
+                        <div class="contact-details">
+                            <h4>github</h4>
+                            <p>github.com/henryvx7</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon"></div>
+                        <div class="contact-details">
+                            <h4>linkedin</h4>
+                            <p>linkedin.com/in/henrythephan</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon"></div>
+                        <div class="contact-details">
+                            <h4>insta</h4>
+                            <p>@bottleduphenny</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon"></div>
+                        <div class="contact-details">
+                            <h4>location</h4>
+                            <p>Phoenix, AZ</p>
                         </div>
                     </div>
                 </div>
                 
-                <div class="project-card">
-                    <div class="project-header">
-                        <h3 class="project-title">kubernetes_cluster_manager</h3>
-                        <div class="project-status">maintained</div>
+                <div class="contact-form">
+                    <div class="form-group">
+                        <label for="name">name:</label>
+                        <input type="text" id="name" name="name" required>
                     </div>
-                    <div class="project-content">
-                        <p class="project-description">A CLI tool for managing Kubernetes clusters with automated deployment pipelines. Simplifies complex k8s operations and provides infrastructure as code capabilities with Terraform integration.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">go</span>
-                            <span class="tech-tag">kubernetes</span>
-                            <span class="tech-tag">terraform</span>
-                            <span class="tech-tag">helm</span>
-                            <span class="tech-tag">yaml</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="#" class="project-link">github</a>
-                            <a href="#" class="project-link">releases</a>
-                        </div>
+                    <div class="form-group">
+                        <label for="email">email:</label>
+                        <input type="email" id="email" name="email" required>
                     </div>
+                    <div class="form-group">
+                        <label for="subject">subject:</label>
+                        <input type="text" id="subject" name="subject" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">message:</label>
+                        <textarea id="message" name="message" required placeholder="$ echo 'your message here'"></textarea>
+                    </div>
+                    <button type="submit" class="submit-button">send message</button>
                 </div>
-                
-                <div class="project-card">
-                    <div class="project-header">
-                        <h3 class="project-title">arch_dotfiles</h3>
-                        <div class="project-status">personal</div>
-                    </div>
-                    <div class="project-content">
-                        <p class="project-description">My personal Arch Linux dotfiles featuring a minimal i3wm setup, custom Polybar configuration, and automated installation scripts. Focused on productivity and aesthetic minimalism.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">bash</span>
-                            <span class="tech-tag">i3w
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p><span class="prompt">henry's@cloud:~$</span> uptime</p>
+                <p>system has been running since 2023</p>
+                <p style="margin-top: 1rem; color: #666;">© 2025 henrythephan - built with sticks and stones</p>
+                <p style="font-size: 0.8rem; color: #666; margin-top: 0.5rem;">
+                    <span class="prompt">$</span> cat /etc/os-release | grep PRETTY_NAME<br>
+                    PRETTY_NAME="Henry's Portfolio (LTS Edition)"
+                </p>
+            </div>
+        </div>
+    </footer>
