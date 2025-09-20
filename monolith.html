@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>user@portfolio:~$ whoami</title>
+    <title>henry's@cloud:~$</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
         
@@ -17,7 +17,7 @@
             --text-secondary: #666666;
             --text-muted: #999999;
             --bg-primary: #ffffff;
-            --bg-secondary: #f8f9fa;
+            --bg-secondary: #e7e7e7;
             --bg-terminal: #1a1a1a;
             --border-color: #e0e0e0;
             --mono-font: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
@@ -113,7 +113,7 @@
             background: var(--bg-terminal);
             border-radius: 8px;
             width: 100%;
-            max-width: 800px;
+            max-width: 1600px;
             margin: 0 2rem;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
             overflow: hidden;
@@ -157,7 +157,7 @@
             font-family: var(--mono-font);
             font-size: 0.95rem;
             line-height: 1.8;
-            min-height: 400px;
+            min-height: 600px;
         }
 
         .terminal-line {
@@ -172,6 +172,11 @@
         .terminal-line:nth-child(4) { animation-delay: 2s; }
         .terminal-line:nth-child(5) { animation-delay: 2.5s; }
         .terminal-line:nth-child(6) { animation-delay: 3s; }
+        .terminal-line:nth-child(7) { animation-delay: 3.5s; }
+        .terminal-line:nth-child(8) { animation-delay: 4s; }
+        .terminal-line:nth-child(9) { animation-delay: 4.5s; }
+        .terminal-line:nth-child(10) { animation-delay: 5s; }
+        .terminal-line:nth-child(11) { animation-delay: 5.1s; }
 
         .prompt {
             color: var(--arch-blue);
@@ -233,7 +238,7 @@
         /* About Section */
         .about-grid {
             display: grid;
-            grid-template-columns: 300px 1fr;
+            grid-template-columns: 400px 1fr;
             gap: 4rem;
             align-items: start;
         }
@@ -290,16 +295,70 @@
         .stat-label {
             color: var(--text-secondary);
         }
+        
+        .resume-viewer {
+            width: 100%;
+            height: 870px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            background: var(--bg-primary);
+        }
 
-        .about-content {
-            font-size: 1rem;
-            line-height: 1.8;
+        .resume-header {
+            padding: 1rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .resume-title {
+            font-family: var(--mono-font);
+            font-size: 0.9rem;
             color: var(--text-primary);
+        }
+
+        .download-link {
+            background: var(--bg-terminal);
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 2px;
+            font-family: var(--mono-font);
+            font-size: 0.85rem;
+            transition: background 0.2s ease;
+        }
+
+        .download-link:hover {
+            background: var(--arch-blue);
+        }
+
+        .pdf-fallback {
+            padding: 2rem;
+            text-align: center;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-family: var(--mono-font);
+            color: var(--text-secondary);
+        }
+
+        .pdf-fallback a {
+            color: var(--arch-blue);
+            text-decoration: none;
+        }
+
+        .pdf-fallback a:hover {
+            text-decoration: underline;
         }
 
         .about-content p {
             margin-bottom: 1.5rem;
         }
+
 
         /* Skills Section */
         .skills-grid {
@@ -651,7 +710,7 @@
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
-            <div class="logo"><span class="prompt">user@portfolio:~$</span> whoami</div>
+            <div class="logo"><span class="prompt">henrys@cloud:~$</span> whoami</div>
             <ul class="nav-menu">
                 <li><a href="#home" class="nav-link">home</a></li>
                 <li><a href="#about" class="nav-link">about</a></li>
@@ -671,16 +730,20 @@
                     <div class="control-btn minimize"></div>
                     <div class="control-btn maximize"></div>
                 </div>
-                <div class="terminal-title">user@portfolio: ~</div>
+                <div class="terminal-title">henrys@portfolio: ~</div>
             </div>
             <div class="terminal-body">
-                <div class="terminal-line"><span class="prompt">user@portfolio:~$</span> <span class="command">whoami</span></div>
-                <div class="terminal-line"><span class="output">John Developer</span></div>
-                <div class="terminal-line"><span class="prompt">user@portfolio:~$</span> <span class="command">cat role.txt</span></div>
-                <div class="terminal-line"><span class="output">Full Stack Developer | System Administrator</span></div>
-                <div class="terminal-line"><span class="prompt">user@portfolio:~$</span> <span class="command">ls skills/</span></div>
-                <div class="terminal-line"><span class="output">python/  javascript/  linux/  docker/  <span class="accent">kubernetes/</span></span></div>
-                <div class="terminal-line"><span class="prompt">user@portfolio:~$</span> <span class="cursor">&nbsp;</span></div>
+                <div class="terminal-line"><span class="prompt">henrys@portfolio:~$</span> <span class="command">whoami</span></div>
+                <div class="terminal-line"><span class="output">Henry Phan, senior studying <span style="color: #FFC627">information technology</span> @ <span style="color: #8C1D40">arizona state university</span></span></div>
+                <div class="terminal-line"><span class="prompt">henrys@portfolio:~$</span> <span class="command">cat role.txt</span></div>
+                <div class="terminal-line"><span class="output">IT-Deskside-Support for SCAI's IT group</span></div>
+                <div class="terminal-line"><span class="prompt">henrys@portfolio:~$</span> <span class="command">ls hobbies/</span></div>
+                <div class="terminal-line"><span class="output">homelab/ hardware.cfg cars/ basketball.mkv baseball.mp4 edc.fstab</span></div>
+                <div class="terminal-line"><span class="prompt">henrys@portfolio:~$</span> <span class="command">ls skills/</span></div>
+                <div class="terminal-line"><span class="output">bash/ javascript/ <span style="color: green">python/</span> linux/ virtualization/ <span class="accent">kubernetes/</span> ci-cd/</span></div>
+                <div class="terminal-line"><span class="prompt">henrys@portfolio:~$</span> <span class="command">cat about.log</span></div>
+                <div class="terminal-line"><span class="output">My passion for technology was ignited by a childhood curiosity that sprouted from building my first computer at the age of 7. This early exposure fueled my exploration of various aspects of technology and IT, including production, troubleshooting, coding, hardware, and networking. After gaining valuable communication and work ethic skills in the service industry, I am eager to transition into a career that aligns more closely with my academic background and personal interests.</span></div>
+                <div class="terminal-line"><span class="prompt">henrys@portfolio:~$</span> <span class="cursor">&nbsp;</span></div>
             </div>
         </div>
     </section>
@@ -694,41 +757,59 @@
             </div>
             <div class="about-grid">
                 <div class="profile-card">
-                    <div class="profile-avatar">JD</div>
-                    <h3 class="profile-name">john_developer</h3>
-                    <p class="profile-role">full_stack_dev</p>
+                    <div class="profile-avatar">HP</div>
+                    <h3 class="profile-name">henry_phan</h3>
+                    <p class="profile-role">IT_deskside_support</p>
                     <div class="profile-stats">
                         <div class="stat-item">
                             <span class="stat-label">uptime:</span>
-                            <span>5+ years</span>
+                            <span>3+ years</span>
                         </div>
                         <div class="stat-item">
                             <span class="stat-label">location:</span>
-                            <span>/usr/local</span>
+                            <span>/home/usa/arizona</span>
                         </div>
                         <div class="stat-item">
+                            <span class="stat-label">dream job:</span>
+                            <span>virtualization engineer</span>
+                        </div>                        
+                        <div class="stat-item">
                             <span class="stat-label">shell:</span>
-                            <span>/bin/zsh</span>
+                            <span>/usr/bin/fish</span>
                         </div>
                         <div class="stat-item">
                             <span class="stat-label">editor:</span>
-                            <span>vim/vscode</span>
+                            <span>vscode || nano</span>
                         </div>
                         <div class="stat-item">
                             <span class="stat-label">os:</span>
-                            <span>arch_linux</span>
+                            <span>arch || ubuntu</span>
                         </div>
+                        <div class="stat-item">
+                            <span class="stat-label">lorem:</span>
+                            <span>ipsum</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">lorem:</span>
+                            <span>ipsum</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">lorem:</span>
+                            <span>ipsum</span>
+                        </div>                                                
                     </div>
                 </div>
                 <div class="about-content">
-                    <p>I'm a passionate full-stack developer with a strong background in Linux system administration. My journey started with curiosity about how computers work, leading me from basic shell scripting to architecting scalable web applications.</p>
-                    
-                    <p>I believe in the philosophy of open source software - collaboration, transparency, and continuous improvement. Just like the Linux community that shaped my technical foundation, I strive to write clean, efficient code and contribute back to the developer community.</p>
-                    
-                    <p>When I'm not coding, you'll find me exploring new Linux distributions, optimizing system configurations, or contributing to open source projects. I'm particularly interested in DevOps practices, containerization, and building robust CI/CD pipelines.</p>
-                    
-                    <p>My approach to problem-solving is methodical and systematic - much like debugging a kernel panic or tracing through system logs. I enjoy the challenge of finding elegant solutions to complex problems.</p>
-                </div>
+                    <div class="resume-header">
+                        <div class="resume-title">resume.pdf</div>
+                        <a href="HenryPhanResumeREDACTED.pdf" class="download-link" download>download</a>
+                    </div>
+                    <iframe src="HenryPhanResumeREDACTED.pdf" class="resume-viewer" title="Resume PDF">
+                        <div class="pdf-fallback">
+                            <p>Your browser doesn't support PDF viewing.</p>
+                            <p><a href="HenryPhanResumeREDACTED.pdf" target="_blank">Click here to open the resume in a new tab</a></p>
+                        </div>
+                    </iframe>
             </div>
         </div>
     </section>
@@ -745,7 +826,11 @@
                     <h3><div class="skill-icon"></div>languages</h3>
                     <div class="skill-list">
                         <div class="skill-item">
-                            <span class="skill-name">python</span>
+                            <span class="skill-name">bash</span>
+                            <span class="skill-level">expert</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">powershell</span>
                             <span class="skill-level">advanced</span>
                         </div>
                         <div class="skill-item">
@@ -753,41 +838,37 @@
                             <span class="skill-level">advanced</span>
                         </div>
                         <div class="skill-item">
-                            <span class="skill-name">typescript</span>
+                            <span class="skill-name">python</span>
                             <span class="skill-level">intermediate</span>
                         </div>
                         <div class="skill-item">
-                            <span class="skill-name">bash</span>
-                            <span class="skill-level">advanced</span>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-name">go</span>
-                            <span class="skill-level">beginner</span>
+                            <span class="skill-name">sql</span>
+                            <span class="skill-level">intermediate</span>
                         </div>
                     </div>
                 </div>
                 
                 <div class="skill-category">
-                    <h3><div class="skill-icon"></div>frameworks</h3>
+                    <h3><div class="skill-icon"></div>infrastructure</h3>
                     <div class="skill-list">
                         <div class="skill-item">
-                            <span class="skill-name">react</span>
+                            <span class="skill-name">virtualization</span>
+                            <span class="skill-level">expert</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">kubernetes</span>
                             <span class="skill-level">advanced</span>
                         </div>
                         <div class="skill-item">
-                            <span class="skill-name">node.js</span>
+                            <span class="skill-name">docker</span>
                             <span class="skill-level">advanced</span>
                         </div>
                         <div class="skill-item">
-                            <span class="skill-name">django</span>
+                            <span class="skill-name">aws-cloud</span>
                             <span class="skill-level">intermediate</span>
                         </div>
                         <div class="skill-item">
-                            <span class="skill-name">express</span>
-                            <span class="skill-level">advanced</span>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-name">fastapi</span>
+                            <span class="skill-name">ci/cd</span>
                             <span class="skill-level">intermediate</span>
                         </div>
                     </div>
@@ -801,19 +882,19 @@
                             <span class="skill-level">expert</span>
                         </div>
                         <div class="skill-item">
-                            <span class="skill-name">docker</span>
+                            <span class="skill-name">windows</span>
+                            <span class="skill-level">expert</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">android</span>
+                            <span class="skill-level">expert</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">macOS</span>
                             <span class="skill-level">advanced</span>
                         </div>
                         <div class="skill-item">
-                            <span class="skill-name">kubernetes</span>
-                            <span class="skill-level">intermediate</span>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-name">nginx</span>
-                            <span class="skill-level">advanced</span>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-name">postgresql</span>
+                            <span class="skill-name">iOS</span>
                             <span class="skill-level">intermediate</span>
                         </div>
                     </div>
@@ -823,24 +904,24 @@
                     <h3><div class="skill-icon"></div>tools</h3>
                     <div class="skill-list">
                         <div class="skill-item">
-                            <span class="skill-name">git</span>
+                            <span class="skill-name">proxmox ve</span>
+                            <span class="skill-level">expert</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">active directory</span>
                             <span class="skill-level">advanced</span>
                         </div>
                         <div class="skill-item">
-                            <span class="skill-name">vim</span>
-                            <span class="skill-level">intermediate</span>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-name">tmux</span>
-                            <span class="skill-level">intermediate</span>
+                            <span class="skill-name">adobe suite</span>
+                            <span class="skill-level">advanced</span>
                         </div>
                         <div class="skill-item">
                             <span class="skill-name">ansible</span>
-                            <span class="skill-level">beginner</span>
+                            <span class="skill-level">intermediate</span>
                         </div>
                         <div class="skill-item">
-                            <span class="skill-name">terraform</span>
-                            <span class="skill-level">beginner</span>
+                            <span class="skill-name">servicenow</span>
+                            <span class="skill-level">intermediate</span>
                         </div>
                     </div>
                 </div>
