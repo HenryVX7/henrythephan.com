@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>user@portfolio:~$ whoami</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        :root {
+            --primary-color: #ffffff;
+            --secondary-color: #000000;
+            --accent-color: #f39c12;
+            --ubuntu-orange: #e95420;
+            --arch-blue: #1793d1;
+            --text-primary: #000000;
+            --text-secondary: #666666;
+            --text-muted: #999999;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --bg-terminal: #1a1a1a;
+            --border-color: #e0e0e0;
+            --mono-font: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+            --sans-font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--sans-font);
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--bg-primary);
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+            padding: 0.75rem 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--mono-font);
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .logo .prompt {
+            color: var(--arch-blue);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-family: var(--mono-font);
+            font-size: 0.9rem;
+            font-weight: 400;
+            transition: color 0.2s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--arch-blue);
+        }
+
+        .nav-link::before {
+            content: '$ ';
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .nav-link:hover::before {
+            opacity: 1;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-primary);
+            position: relative;
+        }
+
+        .terminal-window {
+            background: var(--bg-terminal);
+            border-radius: 8px;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 2rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .terminal-header {
+            background: var(--bg-secondary);
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .terminal-controls {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .control-btn {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .control-btn.close { background: #ff5f56; }
+        .control-btn.minimize { background: #ffbd2e; }
+        .control-btn.maximize { background: #27ca3f; }
+
+        .terminal-title {
+            font-family: var(--mono-font);
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-left: 1rem;
+        }
+
+        .terminal-body {
+            background: var(--bg-terminal);
+            color: #ffffff;
+            padding: 2rem;
+            font-family: var(--mono-font);
+            font-size: 0.95rem;
+            line-height: 1.8;
+            min-height: 400px;
+        }
+
+        .terminal-line {
+            margin-bottom: 0.5rem;
+            animation: typewriter 0.8s steps(40, end) forwards;
+            opacity: 0;
+        }
+
+        .terminal-line:nth-child(1) { animation-delay: 0.5s; }
+        .terminal-line:nth-child(2) { animation-delay: 1s; }
+        .terminal-line:nth-child(3) { animation-delay: 1.5s; }
+        .terminal-line:nth-child(4) { animation-delay: 2s; }
+        .terminal-line:nth-child(5) { animation-delay: 2.5s; }
+        .terminal-line:nth-child(6) { animation-delay: 3s; }
+
+        .prompt {
+            color: var(--arch-blue);
+        }
+
+        .command {
+            color: #ffffff;
+        }
+
+        .output {
+            color: #a0a0a0;
+        }
+
+        .accent {
+            color: var(--ubuntu-orange);
+        }
+
+        .cursor {
+            background: #ffffff;
+            animation: blink 1s infinite;
+        }
+
+        /* Sections */
+        .section {
+            padding: 4rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .section:last-child {
+            border-bottom: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-family: var(--mono-font);
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .section-line {
+            flex: 1;
+            height: 1px;
+            background: var(--border-color);
+        }
+
+        /* About Section */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .profile-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 4px;
+            background: var(--bg-terminal);
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--mono-font);
+            font-size: 2rem;
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+        .profile-name {
+            font-family: var(--mono-font);
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-role {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .profile-stats {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            font-family: var(--mono-font);
+            font-size: 0.85rem;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+        }
+
+        .about-content {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--text-primary);
+        }
+
+        .about-content p {
+            margin-bottom: 1.5rem;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-category {
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 1.5rem;
+            background: var(--bg-secondary);
+        }
+
+        .skill-category h3 {
+            font-family: var(--mono-font);
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .skill-icon {
+            width: 20px;
+            height: 20px;
+            background: var(--arch-blue);
+            border-radius: 2px;
+        }
+
+        .skill-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .skill-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: var(--mono-font);
+            font-size: 0.9rem;
+        }
+
+        .skill-name {
+            color: var(--text-primary);
+        }
+
+        .skill-level {
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .project-card {
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            background: var(--bg-primary);
+            overflow: hidden;
+            transition: border-color 0.2s ease;
+        }
+
+        .project-card:hover {
+            border-color: var(--arch-blue);
+        }
+
+        .project-header {
+            background: var(--bg-secondary);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .project-title {
+            font-family: var(--mono-font);
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .project-status {
+            background: var(--ubuntu-orange);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 2px;
+            font-size: 0.8rem;
+            font-family: var(--mono-font);
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-description {
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tech-tag {
+            background: var(--bg-terminal);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 2px;
+            font-family: var(--mono-font);
+            font-size: 0.8rem;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+            font-family: var(--mono-font);
+            font-size: 0.9rem;
+        }
+
+        .project-link {
+            color: var(--arch-blue);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: color 0.2s ease;
+        }
+
+        .project-link:hover {
+            color: var(--ubuntu-orange);
+        }
+
+        .project-link::before {
+            content: '>';
+            font-weight: bold;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: var(--bg-secondary);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-info {
+            font-family: var(--mono-font);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            background: var(--bg-primary);
+        }
+
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--bg-terminal);
+            border-radius: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .contact-details h4 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .contact-details p {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            font-family: var(--mono-font);
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 2px;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: var(--mono-font);
+            font-size: 0.9rem;
+            transition: border-color 0.2s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--arch-blue);
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .submit-button {
+            padding: 0.75rem 1.5rem;
+            background: var(--bg-terminal);
+            color: white;
+            border: none;
+            border-radius: 2px;
+            font-family: var(--mono-font);
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .submit-button:hover {
+            background: var(--arch-blue);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--bg-terminal);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            font-family: var(--mono-font);
+            font-size: 0.9rem;
+        }
+
+        .footer-content .prompt {
+            color: var(--arch-blue);
+        }
+
+        /* Animations */
+        @keyframes typewriter {
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                gap: 1rem;
+            }
+
+            .nav-link {
+                font-size: 0.8rem;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .terminal-window {
+                margin: 0 1rem;
+            }
+
+            .terminal-body {
+                padding: 1.5rem;
+                font-size: 0.85rem;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+
+            .section-line {
+                width: 100%;
+            }
+        }
+
+        /* Scroll behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        section {
+            scroll-margin-top: 80px;
+        }
+
+        /* Selection styling */
+        ::selection {
+            background: var(--arch-blue);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo"><span class="prompt">user@portfolio:~$</span> whoami</div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">home</a></li>
+                <li><a href="#about" class="nav-link">about</a></li>
+                <li><a href="#skills" class="nav-link">skills</a></li>
+                <li><a href="#projects" class="nav-link">projects</a></li>
+                <li><a href="#contact" class="nav-link">contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <div class="terminal-controls">
+                    <div class="control-btn close"></div>
+                    <div class="control-btn minimize"></div>
+                    <div class="control-btn maximize"></div>
+                </div>
+                <div class="terminal-title">user@portfolio: ~</div>
+            </div>
+            <div class="terminal-body">
+                <div class="terminal-line"><span class="prompt">user@portfolio:~$</span> <span class="command">whoami</span></div>
+                <div class="terminal-line"><span class="output">John Developer</span></div>
+                <div class="terminal-line"><span class="prompt">user@portfolio:~$</span> <span class="command">cat role.txt</span></div>
+                <div class="terminal-line"><span class="output">Full Stack Developer | System Administrator</span></div>
+                <div class="terminal-line"><span class="prompt">user@portfolio:~$</span> <span class="command">ls skills/</span></div>
+                <div class="terminal-line"><span class="output">python/  javascript/  linux/  docker/  <span class="accent">kubernetes/</span></span></div>
+                <div class="terminal-line"><span class="prompt">user@portfolio:~$</span> <span class="cursor">&nbsp;</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">./about</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="about-grid">
+                <div class="profile-card">
+                    <div class="profile-avatar">JD</div>
+                    <h3 class="profile-name">john_developer</h3>
+                    <p class="profile-role">full_stack_dev</p>
+                    <div class="profile-stats">
+                        <div class="stat-item">
+                            <span class="stat-label">uptime:</span>
+                            <span>5+ years</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">location:</span>
+                            <span>/usr/local</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">shell:</span>
+                            <span>/bin/zsh</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">editor:</span>
+                            <span>vim/vscode</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">os:</span>
+                            <span>arch_linux</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-content">
+                    <p>I'm a passionate full-stack developer with a strong background in Linux system administration. My journey started with curiosity about how computers work, leading me from basic shell scripting to architecting scalable web applications.</p>
+                    
+                    <p>I believe in the philosophy of open source software - collaboration, transparency, and continuous improvement. Just like the Linux community that shaped my technical foundation, I strive to write clean, efficient code and contribute back to the developer community.</p>
+                    
+                    <p>When I'm not coding, you'll find me exploring new Linux distributions, optimizing system configurations, or contributing to open source projects. I'm particularly interested in DevOps practices, containerization, and building robust CI/CD pipelines.</p>
+                    
+                    <p>My approach to problem-solving is methodical and systematic - much like debugging a kernel panic or tracing through system logs. I enjoy the challenge of finding elegant solutions to complex problems.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">./skills --list</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3><div class="skill-icon"></div>languages</h3>
+                    <div class="skill-list">
+                        <div class="skill-item">
+                            <span class="skill-name">python</span>
+                            <span class="skill-level">advanced</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">javascript</span>
+                            <span class="skill-level">advanced</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">typescript</span>
+                            <span class="skill-level">intermediate</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">bash</span>
+                            <span class="skill-level">advanced</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">go</span>
+                            <span class="skill-level">beginner</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3><div class="skill-icon"></div>frameworks</h3>
+                    <div class="skill-list">
+                        <div class="skill-item">
+                            <span class="skill-name">react</span>
+                            <span class="skill-level">advanced</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">node.js</span>
+                            <span class="skill-level">advanced</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">django</span>
+                            <span class="skill-level">intermediate</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">express</span>
+                            <span class="skill-level">advanced</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">fastapi</span>
+                            <span class="skill-level">intermediate</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3><div class="skill-icon"></div>systems</h3>
+                    <div class="skill-list">
+                        <div class="skill-item">
+                            <span class="skill-name">linux</span>
+                            <span class="skill-level">expert</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">docker</span>
+                            <span class="skill-level">advanced</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">kubernetes</span>
+                            <span class="skill-level">intermediate</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">nginx</span>
+                            <span class="skill-level">advanced</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">postgresql</span>
+                            <span class="skill-level">intermediate</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3><div class="skill-icon"></div>tools</h3>
+                    <div class="skill-list">
+                        <div class="skill-item">
+                            <span class="skill-name">git</span>
+                            <span class="skill-level">advanced</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">vim</span>
+                            <span class="skill-level">intermediate</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">tmux</span>
+                            <span class="skill-level">intermediate</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">ansible</span>
+                            <span class="skill-level">beginner</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">terraform</span>
+                            <span class="skill-level">beginner</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">./projects --recent</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3 class="project-title">distributed_task_queue</h3>
+                        <div class="project-status">active</div>
+                    </div>
+                    <div class="project-content">
+                        <p class="project-description">A high-performance distributed task queue system built with Python and Redis. Features automatic scaling, failure recovery, and real-time monitoring dashboard. Handles 10,000+ tasks per minute in production.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">python</span>
+                            <span class="tech-tag">redis</span>
+                            <span class="tech-tag">docker</span>
+                            <span class="tech-tag">react</span>
+                            <span class="tech-tag">postgresql</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">github</a>
+                            <a href="#" class="project-link">demo</a>
+                            <a href="#" class="project-link">docs</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3 class="project-title">kubernetes_cluster_manager</h3>
+                        <div class="project-status">maintained</div>
+                    </div>
+                    <div class="project-content">
+                        <p class="project-description">A CLI tool for managing Kubernetes clusters with automated deployment pipelines. Simplifies complex k8s operations and provides infrastructure as code capabilities with Terraform integration.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">go</span>
+                            <span class="tech-tag">kubernetes</span>
+                            <span class="tech-tag">terraform</span>
+                            <span class="tech-tag">helm</span>
+                            <span class="tech-tag">yaml</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">github</a>
+                            <a href="#" class="project-link">releases</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3 class="project-title">arch_dotfiles</h3>
+                        <div class="project-status">personal</div>
+                    </div>
+                    <div class="project-content">
+                        <p class="project-description">My personal Arch Linux dotfiles featuring a minimal i3wm setup, custom Polybar configuration, and automated installation scripts. Focused on productivity and aesthetic minimalism.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">bash</span>
+                            <span class="tech-tag">i3w
