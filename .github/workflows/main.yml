@@ -13,7 +13,7 @@ jobs:
     runs-on: self-hosted
     steps:
       - name: Update code from Git
-        working-directory: /var/www/html
+        working-directory: /var/www/henrythephan.com
         run: |
           echo "Fetching latest changes..."
           git fetch --all
