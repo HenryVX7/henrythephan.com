@@ -1,0 +1,26 @@
+name: CICD
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+      
+jobs:
+  deploy-to-server:
+    runs-on: self-hosted
+    steps:
+      - name: Update code from Git
+        working-directory: /var/www/html
+        run: |
+          echo "Fetching latest changes..."
+          git fetch --all
+          echo "Pulling latest changes..."
+          git pull
+    
+      - name: Restart Apache service
+        run: |
+          echo "Restarting Apache..."
+          sudo /bin/systemctl restart apache2.service
