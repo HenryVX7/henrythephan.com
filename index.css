@@ -106,21 +106,28 @@
         /* Hero Section */
         .hero {
             min-height: 100vh;
+            min-height: 100dvh; /* Dynamic viewport height for better mobile support */
             display: flex;
             align-items: center;
             justify-content: center;
             background: var(--bg-primary);
             position: relative;
+            padding: 2rem 0; /* Prevent content from touching edges */
         }
 
         .terminal-window {
             background: var(--bg-terminal);
             border-radius: 8px;
-            width: 100%;
-            max-width: 90%;
-            margin: 0 2rem;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            width: min(90%, 1200px); /* More responsive width with max constraint */
+            margin: 0 auto;
+            box-shadow: 
+                0 4px 6px -1px rgba(0, 0, 0, 0.1),
+                0 2px 4px -1px rgba(0, 0, 0, 0.06),
+                0 20px 60px rgba(0, 0, 0, 0.15); /* Layered shadows for depth */
             overflow: hidden;
+            /* Performance optimizations */
+            transform: translateZ(0); /* Force hardware acceleration */
+            will-change: transform; /* Hint to browser for optimization */
         }
 
         .terminal-header {
@@ -130,17 +137,28 @@
             align-items: center;
             gap: 0.5rem;
             border-bottom: 1px solid var(--border-color);
+            /* Prevent layout shift */
+            min-height: 52px;
         }
 
         .terminal-controls {
             display: flex;
             gap: 0.5rem;
+            flex-shrink: 0; /* Prevent controls from shrinking */
         }
 
         .control-btn {
             width: 12px;
             height: 12px;
             border-radius: 50%;
+            flex-shrink: 0;
+            /* Add subtle hover effect for better UX */
+            transition: transform 0.1s ease;
+            cursor: pointer;
+        }
+
+        .control-btn:hover {
+            transform: scale(1.1);
         }
 
         .control-btn.close { background: #ff5f56; }
@@ -152,6 +170,9 @@
             font-size: 0.9rem;
             color: var(--text-secondary);
             margin-left: 1rem;
+            white-space: nowrap; /* Prevent title wrapping */
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .terminal-body {
@@ -159,28 +180,31 @@
             color: #ffffff;
             padding: 2rem;
             font-family: var(--mono-font);
-            font-size: 0.95rem;
+            font-size: clamp(0.8rem, 2vw, 0.95rem); /* Responsive font size */
             line-height: 1.8;
-            min-height: 600px;
+            min-height: 400px; /* Reduced from 600px for better mobile experience */
+            overflow-x: auto; /* Handle long terminal lines */
+            /* Performance optimizations */
+            contain: layout style paint; /* CSS containment for performance */
         }
 
         .terminal-line {
             margin-bottom: 0.5rem;
-            animation: typewriter 0.8s steps(40, end) forwards;
-            opacity: 0;
+            animation: terminal-appear 0.6s ease-out forwards;
+            opacity: 0;            
         }
 
-        .terminal-line:nth-child(1) { animation-delay: 0.5s; }
-        .terminal-line:nth-child(2) { animation-delay: 1s; }
-        .terminal-line:nth-child(3) { animation-delay: 1.5s; }
-        .terminal-line:nth-child(4) { animation-delay: 2s; }
-        .terminal-line:nth-child(5) { animation-delay: 2.5s; }
-        .terminal-line:nth-child(6) { animation-delay: 3s; }
-        .terminal-line:nth-child(7) { animation-delay: 3.5s; }
-        .terminal-line:nth-child(8) { animation-delay: 4s; }
-        .terminal-line:nth-child(9) { animation-delay: 4.5s; }
-        .terminal-line:nth-child(10) { animation-delay: 5s; }
-        .terminal-line:nth-child(11) { animation-delay: 5.1s; }
+        .terminal-line:nth-child(1) { animation-delay: 0.2s; }
+        .terminal-line:nth-child(2) { animation-delay: 0.4s; }
+        .terminal-line:nth-child(3) { animation-delay: 0.6s; }
+        .terminal-line:nth-child(4) { animation-delay: 0.8s; }
+        .terminal-line:nth-child(5) { animation-delay: 1.0s; }
+        .terminal-line:nth-child(6) { animation-delay: 1.2s; }
+        .terminal-line:nth-child(7) { animation-delay: 1.4s; }
+        .terminal-line:nth-child(8) { animation-delay: 1.6s; }
+        .terminal-line:nth-child(9) { animation-delay: 1.8s; }
+        .terminal-line:nth-child(10) { animation-delay: 2.0s; }
+        .terminal-line:nth-child(11) { animation-delay: 2.2s; }
 
         .prompt {
             color: var(--arch-blue);
@@ -192,6 +216,7 @@
 
         .output {
             color: #a0a0a0;
+            word-wrap: break-word;
         }
 
         .accent {
@@ -650,6 +675,14 @@
         }
 
         /* Animations */
+        @keyframes terminal-appear {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+
         @keyframes typewriter {
             to {
                 opacity: 1;
@@ -676,8 +709,25 @@
             color: white;
         }
 
-        /* Responsive Design */
-        
+        /* Prefers-reduced-motion support for accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            .terminal-line {
+                animation: none;
+                opacity: 1;
+                transform: none;
+                user-select: text;
+            }
+            
+            .cursor {
+                animation: none;
+                opacity: 1;
+            }
+            
+            .control-btn:hover {
+                transform: none;
+            }
+        }
+
         /* Large tablets and small desktops */
         @media (max-width: 1024px) {
             .container {
