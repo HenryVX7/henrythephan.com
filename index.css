@@ -542,7 +542,7 @@
         .contact-icon {
             width: 40px;
             height: 40px;
-            background: var(--bg-terminal);
+            /* background: var(--bg-terminal); */
             border-radius: 2px;
             display: flex;
             align-items: center;
