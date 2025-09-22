@@ -105,8 +105,8 @@
 
         /* Hero Section */
         .hero {
-            min-height: 70vh;
-            min-height: 60dvh; /* Dynamic viewport height for better mobile support */
+            min-height: 80vh;
+            min-height: 80dvh; /* Dynamic viewport height for better mobile support */
             display: flex;
             align-items: center;
             justify-content: center;
