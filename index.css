@@ -497,6 +497,20 @@
             line-height: 1.6;
         }
 
+        .project-images {
+          display: flex;
+          gap: 1rem;
+          margin-bottom: 1.5rem;
+        }
+
+        .project-images img {
+          flex: 1;
+          max-width: 20%;
+          border-radius: 4px;
+          border: 1px solid var(--border-color);
+          object-fit: cover;
+        }
+
         .project-tech {
             display: flex;
             flex-wrap: wrap;
@@ -881,6 +895,14 @@
             
             .project-content {
                 padding: 1.25rem;
+            }
+
+            .project-images {
+                flex-direction: column;
+            }
+
+            .project-images img {
+                max-width: 100%;
             }
             
             .project-links {
