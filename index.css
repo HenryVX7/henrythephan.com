@@ -105,8 +105,8 @@
 
         /* Hero Section */
         .hero {
-            min-height: 100vh;
-            min-height: 100dvh; /* Dynamic viewport height for better mobile support */
+            min-height: 70vh;
+            min-height: 60dvh; /* Dynamic viewport height for better mobile support */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -230,7 +230,7 @@
 
         /* Sections */
         .section {
-            padding: 4rem 0;
+            padding: 2rem 0;
             border-bottom: 1px solid var(--border-color);
         }
 
@@ -717,12 +717,12 @@
                 transform: none;
                 user-select: text;
             }
-            
+
             .cursor {
                 animation: none;
                 opacity: 1;
             }
-            
+
             .control-btn:hover {
                 transform: none;
             }
