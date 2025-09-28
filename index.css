@@ -420,11 +420,34 @@
             font-size: 2rem;
         }
 
+        .experience span#indent {
+            margin-left: 1.5em;
+        }
+
+        .experience span#indent2 {
+            margin-left: 4em;
+        }
+
         .experience img {
             width: 50px;
             height: auto;
         }
 
+        .experience div.asu i {
+            color: #8C1D40;
+        }
+
+        .experience div.godaddy i {
+            color: #1BDBDB;
+        }
+
+        .experience div.bestbuy i {
+            color: #0a4abf;
+        }
+
+        .experience div.cgcc i {
+            color: #00818A;
+        }
         /* Skills Section */
         .skills-grid {
             display: grid;
