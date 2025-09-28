@@ -512,6 +512,45 @@
           box-shadow: -5px 5px 10px 5px #1a1a1a21;
         }
 
+        /* --- Lightbox --- */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+.lightbox.open { display: flex; }
+
+.lightbox .lb-img {
+  max-width: min(95vw, 1400px);
+  max-height: 90vh;
+  border-radius: 4px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+}
+
+.lb-btn {
+  position: absolute;
+  background: transparent;
+  border: 0;
+  color: #fff;
+  font-size: 2rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: .5rem .75rem;
+  user-select: none;
+}
+
+.lb-close { top: 1rem; right: 1rem; }
+.lb-prev  { left: 1rem; }
+.lb-next  { right: 1rem; }
+
+/* Make thumbnails feel interactive */
+.project-images img { cursor: zoom-in; }
+
+
         .project-tech {
             display: flex;
             flex-wrap: wrap;

@@ -275,8 +275,8 @@
                     <div class="project-content">
                         <p class="project-description">As my Homelab expanded, I needed a way to provision and manage accounts across dozens of services that I use and host daily. I built and deployed a self-hosted Identity Provider (IdP) using Authentik to centralize authentication and enable Single Sign-On (SSO) across multiple self-hosted services in my homelab environment. The goal was to simplify user authentication across services, improve access control and session management, and enhance security with centralized identity management. I set up SSO login flows, group-based access policies, and provisioning rules for seamless onboarding. This allowed me to enable MFA and account linking with pre-existing service users for non-disruptive integration and harden access through IP whitelisting, time-based access windows, and audit logging. This service is highly available with failover across 3 nodes. This project improved the usability and security of my infrastructure while reinforcing my skills in identity federation, access control, and zero-trust design principles.</p>
                         <div class="project-images">
-                            <img src="img/pj2/pj2-login.jpg">
-                            <img src="img/pj2/pj2-authentik.jpg">
+                            <img src="img/pj2/pj2-login.png">
+                            <img src="img/pj2/pj2-authentik.png">
                         </div>
                         <div class="project-tech">
                             <span class="tech-tag">openid connect</span>
@@ -392,4 +392,79 @@
             </div>
         </div>
     </footer>
+
+    <!-- Lightbox (global) -->
+<div id="lightbox" class="lightbox" aria-hidden="true">
+  <button class="lb-btn lb-close" aria-label="Close">&times;</button>
+  <button class="lb-btn lb-prev" aria-label="Previous">&#10094;</button>
+  <img class="lb-img" alt="">
+  <button class="lb-btn lb-next" aria-label="Next">&#10095;</button>
+</div>
+
+<script>
+  // Simple Lightbox for .project-images
+  (() => {
+    const lightbox = document.getElementById('lightbox');
+    const imgEl = lightbox.querySelector('.lb-img');
+    const btnPrev = lightbox.querySelector('.lb-prev');
+    const btnNext = lightbox.querySelector('.lb-next');
+    const btnClose = lightbox.querySelector('.lb-close');
+
+    let gallery = [];     // array of URLs for the current project
+    let index = 0;        // current image index
+
+    // Find all project thumbnails
+    document.querySelectorAll('.project-images img').forEach((thumb) => {
+      thumb.addEventListener('click', (e) => {
+        const container = e.currentTarget.closest('.project-images');
+        const imgs = [...container.querySelectorAll('img')];
+
+        // Build gallery from this project row
+        gallery = imgs.map(i => i.dataset.full || i.src);
+        index = imgs.indexOf(e.currentTarget);
+
+        openLightbox(gallery[index]);
+      });
+    });
+
+    function openLightbox(url) {
+      imgEl.src = url;
+      lightbox.classList.add('open');
+      lightbox.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden'; // prevent page scroll
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('open');
+      lightbox.setAttribute('aria-hidden', 'true');
+      imgEl.src = '';
+      document.body.style.overflow = '';
+    }
+
+    function show(delta) {
+      if (!gallery.length) return;
+      index = (index + delta + gallery.length) % gallery.length;
+      imgEl.src = gallery[index];
+    }
+
+    // Controls
+    btnPrev.addEventListener('click', () => show(-1));
+    btnNext.addEventListener('click', () => show(1));
+    btnClose.addEventListener('click', closeLightbox);
+
+    // Click backdrop to close (but not when clicking the image or buttons)
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+
+    // Keyboard support
+    document.addEventListener('keydown', (e) => {
+      if (!lightbox.classList.contains('open')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowRight') show(1);
+      if (e.key === 'ArrowLeft') show(-1);
+    });
+  })();
+</script>
+
 </body>
