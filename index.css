@@ -413,7 +413,8 @@
             font-family: var(--mono-font);
             font-size: 1.5rem;
             margin-bottom: 0rem;
-            line-height: 1;
+            line-height: 1.1;
+            overflow-x: auto;
         }
 
         .experience span.heightened {
@@ -426,6 +427,10 @@
 
         .experience span#indent2 {
             margin-left: 4em;
+        }
+
+        .experience span#indent3 {
+            margin-left: 1.8em;
         }
 
         .experience img {
@@ -952,6 +957,16 @@
             
             .resume-viewer {
                 height: 600px;
+            }
+            
+            .experience {
+                display: none;
+            }
+        }
+            /* Experience section */
+            @media (max-width: 768px) {
+            .experience {
+                display: none;
             }
 
             /* Skills section */
