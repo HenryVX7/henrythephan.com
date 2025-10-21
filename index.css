@@ -660,6 +660,13 @@
           border: 1px solid var(--border-color);
           object-fit: cover;
           box-shadow: -5px 5px 10px 5px #1a1a1a21;
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .project-images img:hover {
+          transform: scale(1.05);
+          box-shadow: -8px 8px 20px 8px #1a1a1a40;
+          z-index: 10;
         }
 
         /* --- Lightbox --- */
@@ -1338,11 +1345,6 @@
 
             .project-title {
                 font-size: 0.9rem;
-            }
-
-            .project-status {
-                font-size: 0.75rem;
-                padding: 0.2rem 0.5rem;
             }
             
             .project-content {
