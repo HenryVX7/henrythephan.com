@@ -266,7 +266,14 @@
             font-family: var(--mono-font);
             font-size: inherit;
             padding: 0;
+            margin: 0;
             caret-color: #ffffff;
+            /* iOS specific fixes */
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            border-radius: 0;
+            box-shadow: none;
         }
 
         .terminal-input::placeholder {
@@ -276,6 +283,12 @@
 
         .terminal-input:focus::placeholder {
             opacity: 0.5;
+        }
+
+        /* Remove iOS input styling */
+        .terminal-input::-webkit-textfield-decoration-container {
+            visibility: hidden;
+            pointer-events: none;
         }
 
         /* Sections */
@@ -615,13 +628,13 @@
         .project-content {
             padding: 1.5rem;
             overflow: hidden;
-            transition: max-height 0.4s ease, padding 0.4s ease;
+            transition: max-height 0.4s ease;
         }
 
         .project-card.collapsed .project-content {
-            padding-top: 0;
-            padding-bottom: 0;
+            padding: 0 1.5rem;
             border-top: none;
+            max-height: 0 !important;
         }
 
         .project-card.collapsed .project-header {
